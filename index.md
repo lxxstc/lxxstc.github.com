@@ -5,7 +5,7 @@ tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
-{% for post in site.posts reversed limit:10 %}
+{% for post in site.posts limit:10 reversed %}
 <div class="post">
   <div class="top">
     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
