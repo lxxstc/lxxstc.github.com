@@ -17,12 +17,12 @@ tags: [postgresql]
 - 我#TODO
 
 ## pg_reorg 原理
-- pg_reorg 做到碎片整理的三部曲:
+ pg_reorg 做到碎片整理的三部曲:
 1. 先在表上获取一个[exclusive lock][exclusive_lock]
 2. 创建一个临时表，收集原始表的改变. 在原始表加一个trigger，将所有变化复制到临时表上
-3. CREATE TABLE用SELECT FROM…ORDER BY, 这会在磁盘上创建一个根据索引顺序存储的新表
-4. 从临时表中将在SELECT FROM开始后发生的所有改变,同步到新表上
-5. 切换到新表上
+3. `CREATE TABLE`用`SELECT FROM…ORDER BY`, 这会在磁盘上创建一个根据索引顺序存储的新表
+4. 从临时表中将在`SELECT FROM`开始后发生的所有改变，同步到新表上
+5. 切换到新表上FROM
 
 - [详情见instagram原文][pg_reorg_from_instagram]
 
