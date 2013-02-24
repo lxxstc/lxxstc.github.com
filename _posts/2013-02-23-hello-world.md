@@ -15,3 +15,6 @@ tags: [other, jekyll]
 
 ## 加一个POST
     $ rake post title="Hello World"
+
+## 启动jekyll
+    $ jekyll --server
