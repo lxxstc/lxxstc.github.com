@@ -17,7 +17,7 @@ tags: [postgresql]
 ## 效果如何
 -----
 - Instagram说，他们用得很爽
-- 我#TODO
+- 我也测试用了一下，感觉问题不大，确实不锁表，并能完成VACUUM FULL的操作。以后可以试试CLUSTER功能
 
 ## pg_reorg 原理
 -----
