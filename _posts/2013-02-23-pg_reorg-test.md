@@ -9,6 +9,7 @@ tags: [postgresql]
 
 ## pg_reorg是什么
 - pg_repack is a PostgreSQL extension which lets you remove bloat from tables and indexes, and optionally restore the physical order of clustered indexes. Unlike CLUSTER and VACUUM FULL it works online, without holding an exclusive lock on the processed tables during processing. pg_repack is efficient to boot, with performance comparable to using CLUSTER directly. [详情见][pg_reorg_src]
+- pg_repack 是 pg_reorg 在github上的 Repository.改了一个名字
 - [使用文档][reorg_tutorial]
 - pg_reorg换了个名字，在github上叫pg_repack
 
@@ -33,23 +34,25 @@ tags: [postgresql]
     $ sudo apt-get install libedit-dev
     $ sudo apt-get install libpam0g-dev
 
-### CentOS下安装依赖
-    $ 
-    $ 
 
 ### 编译和安装
     $ git clone https://github.com/reorg/pg_repack.git
     $ cd pg_repack
     $ make && sudo make install
 
-### 在Postgresql库中安装扩展
+### 在Postgresql库中安装pg_repack扩展
     # CREATE EXTENSION pg_repack;
 
-### 构建RPM
-[pg_reorg.spec]
+### pg_reorg在CentOS上构建RPM;和安装
+[pg91_reorg.spec]
 
+    $ wget http://pgfoundry.org/frs/download.php/3395/pg_reorg-1.1.8.tar.gz -O /tmp/pg_reorg-1.1.8.tar.gz
+    $ cp /tmp/pg91_reorg-1.1.8.tar.gz /home/q/xiaoxu.lv/rpmbuild/SOURCES/
+    $ rpm -bb pg91_reorg.spec
+    $ sudo rpm -ivh pg91_reorg-1.1.8-1.x86_64.rpm
 
-    $
+### 在Postgresql库中安装pg_reorg
+    $ psql -f $PGSHARE/contrib/pg_reorg.sql -d your_database
 
 
 ## 使用pg_reorg进行数据库空间整理
@@ -59,6 +62,6 @@ tags: [postgresql]
 
 [pg_reorg_src]: https://github.com/reorg/pg_repack
 [reorg_tutorial]: http://reorg.projects.pgfoundry.org/pg_reorg.html
-[pg_reorg.spec]: https://gist.github.com/lxxstc/bc3798b410e869b5e8ff
+[pg91_reorg.spec]: https://gist.github.com/lxxstc/bc3798b410e869b5e8ff
 [pg_reorg_from_instagram]: http://instagram-engineering.tumblr.com/post/40781627982/handling-growth-with-postgres-5-tips-from-instagram
 [exclusive_lock]: http://www.postgresql.org/docs/current/static/explicit-locking.html
