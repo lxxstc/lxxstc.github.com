@@ -38,6 +38,7 @@ tags: [postgresql]
 > 而LOG中将输出`NOTICE: Waiting for 4 transactions to finish. First PID: 11987`.
 > 只有等所有的transactions都退出，pg_reorg才会进行后面的操作，并退出。否则将会陷入死循环.
 > 我们可以根据`First PID`查看到底是哪个进程，为什么没有完成事务.并处理掉相应的进程.
+> 一般情况下是autovacuum在捣乱.
 > 下面是一些查看方法:
     $ ps auxxwwww | grep 11987
     $ host xxx.xxx.xxx.xxx
