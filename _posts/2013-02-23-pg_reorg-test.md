@@ -18,6 +18,8 @@ tags: [postgresql]
 -----
 - Instagram说，他们用得很爽
 - 我也测试用了一下，感觉问题不大，确实不锁表，并能完成VACUUM FULL的操作。以后可以试试CLUSTER功能
+> 我使用pg_reorg,处理了一张110G的表，操作完之后，变成65G，用时2小时47分钟
+
 
 ## pg_reorg 原理
 -----
