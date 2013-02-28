@@ -32,6 +32,21 @@ tags: [postgresql]
 
 - [详情见instagram原文][pg_reorg_from_instagram]
 
+## 使用pg_reorg时候的注意事项
+-----
+- You cannot do DDL commands except VACUUM and ANALYZE during pg_reorg. In many case pg_reorg would fail and rollback collectly, but there are some cases ending with data-corruption .
+
+- TRUNCATE
+>   TRUNCATE is lost. Bseted rows still exist after pg_reorg.
+- CREATE INDEX
+>   It causes index corruptions.
+- ALTER TABLE ... ADD COLUMN
+>   It causes lost of data. Newly added columns are initialized with NULLs.
+- ALTER TABLE ... ALTER COLUMN TYPE
+>   It causes data corruptions.
+- ALTER TABLE ... SET TABLESPACE
+>   It causes data corruptions by wrong relfilenode. 
+
 ## 遇到的问题
 -----
 > 当存在没有提交的transaction时，pg_reorg会等在那里，直到所有的事务全部提交.下面是pg_reorg中查询事务的SQL语句
@@ -46,6 +61,9 @@ tags: [postgresql]
     $ host xxx.xxx.xxx.xxx
 
 * 注：什么是[virtualxid]
+
+
+
 
 ## 编译和安装
 -----
