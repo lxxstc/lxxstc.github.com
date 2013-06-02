@@ -38,6 +38,10 @@ archive_timeout
 * 如果一个从挂了，会是什么状况
 
 ## Streaming (hot standby)
+* [Hot Standby Configuration]
+```
+wal_keep_segments =   # This sets only the minimum number of segments retained in pg_xlog,  the system might need to retain more segments for WAL archival or to recover from a checkpoint
+```
 
 ## Time Line
 * 什么是[Time Line]
@@ -102,3 +106,4 @@ archive_timeout
 [Binary Replication Tutorial]: http://wiki.postgresql.org/wiki/Binary_Replication_Tutorial
 [Time Line]: http://www.postgresql.org/docs/9.2/static/continuous-archiving.html
 [Write Ahead Log]: http://www.postgresql.org/docs/9.2/static/wal-intro.html
+[Hot Standby Configuration]: http://www.postgresql.org/docs/9.2/static/runtime-config-replication.html#GUC-HOT-STANDBY
