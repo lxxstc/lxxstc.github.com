@@ -26,7 +26,7 @@ checkpoint_completion_target =
 
 ## PITR & Logging Ship (warming standby)
 * 参数 master postgresql.conf
-```ini
+```python
 #------------------------------------------------------------------------------
 # LOG SHIPPING REPLICATION OPTIONS
 #------------------------------------------------------------------------------
