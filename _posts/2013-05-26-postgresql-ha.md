@@ -18,18 +18,17 @@ tags: [postgresql]
 * rotation
 
 ## check_point
-'''
+
+```
 checkpoint_segments = 3 # default
 checkpoint_timeout = 5 # minute default
 checkpoint_completion_target = 
-'''
+```
 
 ## PITR & Logging Ship (warming standby)
 * 参数 master postgresql.conf
+
 ```python
-#------------------------------------------------------------------------------
-# LOG SHIPPING REPLICATION OPTIONS
-#------------------------------------------------------------------------------
 archive_mode = on # ArchPG
 archive_command = '/usr/bin/omnipitr-archive -l /var/log/qfare_omnipitr/omnipitr-^Y^m^d.log -s /var/run/qfare_omnipitr
 -dr gzip=rsync://l-interdb3.f.cn1.qunar.com/slave_PITR/ -dr gzip=rsync://l-interdb7.f.cn1.qunar.com/slave_PITR/ -dr gzip=rsync://l-interdb4.f.cn1.qunar.com/slave_PITR/ -db /var/run/qfare_omnipitr/dstbackup --pid-file /var/run/qfare_omnipitr/omnipitr.pid -v "%p"'
@@ -39,6 +38,7 @@ archive_timeout
 
 ## Streaming ([Hot Standby])
 * [Hot Standby Configuration]
+
 ```
 wal_keep_segments =   # This sets only the minimum number of segments retained in pg_xlog,  the system might need to retain more segments for WAL archival or to recover from a checkpoint
 ```
