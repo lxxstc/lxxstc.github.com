@@ -12,7 +12,9 @@ tags: [postgresql]
 * PG集群的写入高可用
 
 # 图
-* 结构
+
+* 构件
+
 ![PGHASTRUCTURE](http://farm8.staticflickr.com/7383/8955902504_501ae337e0_b.jpg)
 
 * 数据流
