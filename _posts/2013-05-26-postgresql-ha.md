@@ -104,16 +104,11 @@ has an effect
 ### 集群配置工具 LXX的
 
 
-## 关键参数
-
-* full_page
-* 
-
-
 
 # 监控
 * Streaming Process & Reciving Process
 * RealTime Data Write
+* OmniPITR Log
 
 
 
@@ -126,7 +121,7 @@ has an effect
 
 ## omnipitr出错
 
-## 无法链接从库
+## psql无法链接从库
 
 ## 锁
 
