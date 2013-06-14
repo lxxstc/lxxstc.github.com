@@ -9,7 +9,8 @@ tags: [postgresql]
 
 # 提纲
 * Postgresql主从配置
-* PG集群的写入高可用
+* PG集群的写入高可用配置
+* 如何监控PG集群健康状态
 
 # 图
 
@@ -30,17 +31,23 @@ tags: [postgresql]
     减少磁盘IO
     做PITR
 * Location: $PGDATA/pg_xlog
-* Size: 16MB determinated at compile time
+* Log Segment Size: 16MB determinated at compile time
 * rotation
 * [Write Ahead Log Configuration]
 
 ## check_point
+* [Defination][Write Ahead Log Configuration]
+Checkpoints are points in the sequence of transactions at which it is guaranteed that the heap and index data files
+have been updated with all information written before the checkpoint.
+At checkpoint time, all dirty data pages are flushed to disk and a special checkpoint record is written to the log file.
+* checkpoint 和 wal log segment的对应关系。1 checkpoint ：n wal log segment 或者 n checkpoint : 1 wal log segment
 
 ```
 checkpoint_segments = 3 # default
 checkpoint_timeout = 5 # minute default
 checkpoint_completion_target = 
 ```
+
 
 ## PITR & Logging Ship (warming standby)
 * 参数 master postgresql.conf
@@ -76,6 +83,7 @@ wal_keep_segments = 150         # This sets only the minimum number of segments 
 * 什么是[Time Line]
 
 ```
+# config in recovery.conf
 recovery_target_timeline = 'latest' #This feature isn't documented in 9.0 (documentation bug?) but it still
 has an effect
 
@@ -104,6 +112,10 @@ has an effect
 ###  Omnipitr
 
 * [Binary Replication Tools]
+* 
+### Rsync
+
+### [Check_postgres]
 
 ### 集群配置工具 LXX的
 
@@ -114,6 +126,7 @@ has an effect
 * RealTime Data Write
 * OmniPITR Log
 
+* [Check_postgres]
 
 
 # 流程
@@ -140,3 +153,4 @@ has an effect
 [Write Ahead Log Configuration]: http://www.postgresql.org/docs/9.2/static/wal-configuration.html
 [Hot Standby Configuration]: http://www.postgresql.org/docs/9.2/static/runtime-config-replication.html#GUC-HOT-STANDBY
 [Hot Standby]: www.postgresql.org/docs/9.2/static/hot-standby.html
+[Check_postgres]: http://bucardo.org/wiki/Check_postgres
