@@ -92,7 +92,46 @@ has an effect
 
 * 通过 pg_controldata 查看 time line
 
-
+```
+$ pg_controldata $PG_DATA
+pg_control version number:            922
+Catalog version number:               201204301
+Database system identifier:           5810270594475932634
+Database cluster state:               in production
+pg_control last modified:             Fri 14 Jun 2013 09:14:20 PM CST
+Latest checkpoint location:           61/F34CE340
+Prior checkpoint location:            61/F250F690
+Latest checkpoint's REDO location:    61/F2EBD858
+Latest checkpoint's TimeLineID:       4
+Latest checkpoint's full_page_writes: off
+Latest checkpoint's NextXID:          0/5951991
+Latest checkpoint's NextOID:          167847
+Latest checkpoint's NextMultiXactId:  2198
+Latest checkpoint's NextMultiOffset:  4405
+Latest checkpoint's oldestXID:        1672
+Latest checkpoint's oldestXID's DB:   1
+Latest checkpoint's oldestActiveXID:  5951991
+Time of latest checkpoint:            Fri 14 Jun 2013 09:11:50 PM CST
+Minimum recovery ending location:     0/0
+Backup start location:                0/0
+Backup end location:                  0/0
+End-of-backup record required:        no
+Current wal_level setting:            hot_standby
+Current max_connections setting:      220
+Current max_prepared_xacts setting:   0
+Current max_locks_per_xact setting:   64
+Maximum data alignment:               8
+Database block size:                  8192
+Blocks per segment of large relation: 131072
+WAL block size:                       8192
+Bytes per WAL segment:                16777216
+Maximum length of identifiers:        64
+Maximum columns in an index:          32
+Maximum size of a TOAST chunk:        1996
+Date/time type storage:               64-bit integers
+Float4 argument passing:              by value
+Float8 argument passing:              by value
+```
 
 # 配置文件
 ## postgresql.conf
