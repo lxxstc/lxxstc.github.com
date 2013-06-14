@@ -15,7 +15,7 @@ tags: [postgresql]
 
 * 构件
 
-![PGHASTRUCTURE](http://farm8.staticflickr.com/7383/8955902504_501ae337e0_b.jpg)
+![PGHASTRUCTURE](http://farm4.staticflickr.com/3834/9037909153_63e40cc6b5.jpg)
 
 * 数据流
 ![PGHA](http://lxxstc.github.io/images/PGHA.png)
