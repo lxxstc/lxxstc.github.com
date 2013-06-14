@@ -22,6 +22,7 @@ tags: [postgresql]
 ![PGHA](http://lxxstc.github.io/images/PGHA.png)
 
 * 主从结构拓补
+
 ![PGHATopology](http://farm8.staticflickr.com/7395/9040263240_d620583b25.jpg)
 
 # 概念
