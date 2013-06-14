@@ -136,6 +136,13 @@ Float8 argument passing:              by value
 # 配置文件
 ## postgresql.conf
 ## recovery.conf
+```
+standby_mode = 'on'
+primary_conninfo = 'host=avdbm.f.qunar.com port=5492 user=postgres'
+restore_command = '/usr/bin/omnipitr-restore -l /var/log/avdb_omnipitr/omnipitr-^Y^m^d.log -s gzip=/export/slave_PITR/ -f /var/run/avdb_omnipitr/recovery.stop -r -p /var/run/avdb_omnipitr/removal.stop -sr -v %f %p'
+trigger_file = '/export/slave_PITR//failover'
+recovery_target_timeline = 'latest'
+```
 
 # 方案
 
@@ -150,15 +157,17 @@ Float8 argument passing:              by value
 ## 工具
 
 ###  Omnipitr
-
+* Archiving Tool For Logging Ship
 * [Binary Replication Tools]
-* 
+
 ### Rsync
+* Rsync Deamon on Slave Server
 
 ### [Check_postgres]
+* Monitor Tool
 
 ### 集群配置工具 LXX的
-
+* 配置文件生成工具
 
 
 # 监控
@@ -169,8 +178,11 @@ Float8 argument passing:              by value
 * [Check_postgres]
 
 
-# 流程
+# pg_ha部署流程和操作方法
 * 打包
+* 部署主
+* 部署从
+* 主从切换
 
 # 可能遇到的问题
 
