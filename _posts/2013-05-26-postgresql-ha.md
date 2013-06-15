@@ -182,7 +182,7 @@ recovery_target_timeline = 'latest'
 * 打包
 * 部署主
 * 部署从
-* 主从切换
+* 主从切换: 注意depromoting pg 的timeline是否追上promoting pg的timeline
 
 # 可能遇到的问题
 
