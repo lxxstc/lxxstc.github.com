@@ -78,7 +78,7 @@ wal_keep_segments = 150         # This sets only the minimum number of segments 
 
 ## Master and Standby
 * Standby：If hot_standby is turned on in postgresql.conf and there is a recovery.conf
-* Standby -> Master: touch the trigger file
+* Standby -> Master: 1. touch the trigger file; 2. pg_ctl promote \[-s\] \[-D datadir\]
 
 ## Time Line
 * 什么是[Time Line]
