@@ -32,6 +32,13 @@ tags: [postgresql]
     减少磁盘IO
     做PITR
 * Location: $PGDATA/pg_xlog
+
+```
+00000002.history                          00000004000000620000009D  0000000400000062000000C1
+0000000400000037000000C5.00000020.backup  00000004000000620000009E  0000000400000062000000C2
+00000004000000620000007B                  00000004000000620000009F  0000000400000062000000C3
+
+```
 * Log Segment Size: 16MB determinated at compile time
 * rotation
 * [Write Ahead Log Configuration]
