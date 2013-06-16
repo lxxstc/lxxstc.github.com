@@ -169,7 +169,7 @@ recovery_target_timeline = 'latest'
 * 提供了主从集群的监控项，我没有使用，这里抛砖引玉
 
 ### 集群配置工具 LXX的
-* 配置文件生成工具
+* [配置文件生成工具][Postgresql-Master-HA]
 
 
 # 监控
@@ -242,6 +242,7 @@ postgres 11243  0.0  0.0 8753228 3416 ?        Ss   May28   8:22 postgres: wal r
 [Write Ahead Log]: http://www.postgresql.org/docs/9.2/static/wal-intro.html
 [Write Ahead Log Configuration]: http://www.postgresql.org/docs/9.2/static/wal-configuration.html
 [Hot Standby Configuration]: http://www.postgresql.org/docs/9.2/static/runtime-config-replication.html#GUC-HOT-STANDBY
-[Hot Standby]: www.postgresql.org/docs/9.2/static/hot-standby.html
+[Hot Standby]: http://www.postgresql.org/docs/9.2/static/hot-standby.html
 [Check_postgres]: http://bucardo.org/wiki/Check_postgres
 [OmniPITR]: https://github.com/omniti-labs/omnipitr
+[Postgresql-Master-HA]: https://github.com/lxxstc/Postgresql-Master-HA
