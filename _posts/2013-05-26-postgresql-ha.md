@@ -194,6 +194,21 @@ postgres 11243  0.0  0.0 8753228 3416 ?        Ss   May28   8:22 postgres: wal r
 
 * RealTime Data Write
   * 建立一张监控表，定时更新表中的数据，查看主从数据是否保持一致
+  
+  ```
+Table "public.nagios_test"
+ Column |  Type   | Modifiers 
+--------+---------+-----------
+ id     | integer | 
+ value  | text    | 
+
+$ publish_fare=# select * from public.nagios_test;
+ id |     value      
+----+----------------
+  1 | 20130616210436
+(2 rows)
+
+```
 
 * OmniPITR Log
   * 监控logging ship 是否正常
