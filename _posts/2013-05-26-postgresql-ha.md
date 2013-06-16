@@ -147,42 +147,74 @@ recovery_target_timeline = 'latest'
 # 方案
 
 ## Streaming vs Logging ship
-* Why This?
-
-## 结构
-* 
-* 
+* Why This?  streaming 为 hotstandby，为读服务提供负载均衡，在streaming的主从链接断掉（主要是因为wal_keep_segments设置的比较小），Logging ship会接过主从同步的工作。
 
 
 ## 工具
 
-###  Omnipitr
+###  [OmniPITR]
 * Archiving Tool For Logging Ship
 * [Binary Replication Tools]
 
 ### Rsync
 * Rsync Deamon on Slave Server
 
+
 ### [Check_postgres]
 * Monitor Tool
+* 提供了主从集群的监控项，我没有使用，这里抛砖引玉
 
 ### 集群配置工具 LXX的
 * 配置文件生成工具
 
 
 # 监控
+
+* 监控平台 nagios + nrpe plugin + rpm
+
 * Streaming Process & Reciving Process
+
+```
+# on master
+$ ps auxw | grep sender
+postgres 26829  0.0  0.0 8732256 1700 ?        Ss   May28   1:58 postgres: wal sender process postgres 192.168.24.96(36517) streaming 62/E27C5D80
+postgres 26833  0.0  0.0 8732256 1704 ?        Ss   May28   2:00 postgres: wal sender process postgres 192.168.24.50(57856) streaming 62/E27C5D80
+postgres 26834  0.0  0.0 8732256 1696 ?        Ss   May28   1:46 postgres: wal sender process postgres 192.168.24.153(57102) streaming 62/E27C5D80
+
+# on slave
+$ ps aux | grep rec
+postgres  3970  0.0 13.0 8740512 8580476 ?     Ss   May15  21:15 postgres: startup process   recovering 0000000400000062000000E2
+40004    10918  0.0  0.0 103280   796 pts/0    S+   17:34   0:00 grep rec
+postgres 11243  0.0  0.0 8753228 3416 ?        Ss   May28   8:22 postgres: wal receiver process   streaming 62/E2A43310
+```
+
 * RealTime Data Write
+  * 建立一张监控表，定时更新表中的数据，查看主从数据是否保持一致
+
 * OmniPITR Log
+  * 监控logging ship 是否正常
 
 * [Check_postgres]
 
 
-# pg_ha部署流程和操作方法
+# pg_ha部署流程和操作方法(pg已经生产，但未配置主从或者写高可用)
+* 在集群各机器上部署依赖
 * 打包
+* 部署从(因为会随时切换主从，所有认为所有的机器都是从库，除了当前主库不要出现recovery.conf文件外，其他配置相同)
+  * rsyncd
+  * postgresql.conf
+  * recoery.conf
 * 部署主
-* 部署从
-* 主从切换: 注意depromoting pg 的timeline是否追上promoting pg的timeline
+  * pg_hba
+  * postgresql.conf
+* 验证
+  * 测试各服务是否正常，并查看各个机器的主从角色
+* 从库开始备份主库数据
+* 主从切换
+  * 注意depromoting pg 的timeline是否追上promoting pg的timeline
+  * 切换完成，用监控项的 主从实时数据写入脚本 测试一下
+
+* 部署监控
 
 # 可能遇到的问题
 
@@ -206,3 +238,4 @@ recovery_target_timeline = 'latest'
 [Hot Standby Configuration]: http://www.postgresql.org/docs/9.2/static/runtime-config-replication.html#GUC-HOT-STANDBY
 [Hot Standby]: www.postgresql.org/docs/9.2/static/hot-standby.html
 [Check_postgres]: http://bucardo.org/wiki/Check_postgres
+[OmniPITR]: https://github.com/omniti-labs/omnipitr
