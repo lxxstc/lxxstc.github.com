@@ -78,7 +78,9 @@ wal_keep_segments = 150         # This sets only the minimum number of segments 
 
 ## Master and Standby
 * Standby：If hot_standby is turned on in postgresql.conf and there is a recovery.conf
-* Standby -> Master: 1. touch the trigger file; 2. pg_ctl promote \[-s\] \[-D datadir\]
+* Standby -> Master: 
+  * touch the trigger file;
+  * pg_ctl promote \[-s\] \[-D datadir\]
 
 ## Time Line
 * 什么是[Time Line]
@@ -147,7 +149,9 @@ recovery_target_timeline = 'latest'
 # 方案
 
 ## Streaming vs Logging ship
-* Why This?  streaming 为 hotstandby，为读服务提供负载均衡，在streaming的主从链接断掉（主要是因为wal_keep_segments设置的比较小），Logging ship会接过主从同步的工作。
+* Why This?
+  * streaming 为 hotstandby，为读服务提供负载均衡
+  * 在streaming的主从链接断掉（主要是因为wal_keep_segments设置的比较小），Logging ship会接过主从同步的工作。
 
 
 ## 工具
@@ -193,6 +197,7 @@ postgres 11243  0.0  0.0 8753228 3416 ?        Ss   May28   8:22 postgres: wal r
 
 * OmniPITR Log
   * 监控logging ship 是否正常
+  * omnipitr创建log的权限是600，所以用非postgres用户没法读，我是改了一下代码，改成644了
 
 * [Check_postgres]
 
@@ -223,6 +228,7 @@ postgres 11243  0.0  0.0 8753228 3416 ?        Ss   May28   8:22 postgres: wal r
 ## omnipitr出错
 
 ## psql无法链接从库
+* 从库还没追上主，查看log
 
 ## 锁
 
